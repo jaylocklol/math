@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edumaths login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        /* Hamburger menu styling */
+        .menu-icon {
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .menu-icon div {
+            width: 35px;
+            height: 5px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+        .menu a:hover {
+            background-color: #f0f0f0;
+        }
+        @media (min-width: 600px) {
+            .menu {
+                display: flex;
+            }
+            .menu-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hamburger menu -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<nav class="menu" id="navMenu">
+    <a href="algebra.html">Algebra Practice</a>
+    <a href="bio.html">Biology Practice</a>
+    <a href="german.html">German Practice</a>
+</nav>
+
+<div class="container">
+    <h1>URL Action Selector</h1>
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput" placeholder="https://example.com" required>
+
+    <label for="methodSelect">Select a Method:</label>
+    <select id="methodSelect">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <button onclick="performAction()">Go</button>
+</div>
+
+<script>
+    // Toggle hamburger menu
+    function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function performAction() {
+        const url = document.getElementById('urlInput').value;
+        const method = document.getElementById('methodSelect').value;
+
+        if (!url) {
+            alert('Please enter a valid URL.');
+            return;
+        }
+
+        switch (method) {
+            case "1":
+                // Method 1: Google Translate the page to English
+                var translateURL = 'https://translate.google.com/translate?u=' + encodeURIComponent(url) + '&tl=en';
+                window.location.href = translateURL;
+                break;
+
+            case "2":
+                // Method 2: Embed the URL in an about:blank page
+                var win = window.open();
+                win.document.body.style.margin = '0';
+                win.document.body.style.height = '100vh';
+                var iframe = win.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.referrerPolicy = 'no-referrer';
+                iframe.allow = 'fullscreen';
+                iframe.src = url;
+                win.document.body.appendChild(iframe);
+                var script = win.document.createElement('script');
+                script.src = 'https://3kh0.github.io/js/main.js';
+                win.document.body.appendChild(script);
+                break;
+
+            case "3":
+                // Method 3: Redirect to the specified website
+                window.location.href = "https://onk.vercel.app/";
+                break;
+
+            case "4":
+                // Method 4: Redirect to another specified website (can be customized)
+                window.location.href = "https://jaylocklol.github.io/math/edulong.html";
+                break;
+
+            default:
+                alert('Invalid method selected.');
+        }
+    }
+</script>
+
+</body>
+</html>
