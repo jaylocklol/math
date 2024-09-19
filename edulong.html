@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <h1>Welcome to the Website</h1>
+        <button id="launchButton">Launch EduLong</button>
+    </div>
+    <div class="footer">shhh</div>
+
+    <script>
+        document.getElementById('launchButton').onclick = function() {
+            var link = prompt("Url?");
+            var proxy = 'https://api.codetabs.com/v1/proxy?quest=';
+            fetch(proxy + link)
+              .then((response) => response.text())
+              .then((text) => document.write(text));
+
+            var all = document.getElementsByTagName("*");
+            for (var i = 0, max = all.length; i < max; i++) {
+                if (all[i].src) {
+                    all[i].src = new URL(all[i].src, link).href;
+                    all[i].src = proxy + all[i].src;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
